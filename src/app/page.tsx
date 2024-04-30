@@ -19,7 +19,7 @@ export default async function Home() {
     return (
       <main className="flex min-h-screen items-center justify-center">
         <p className="text-red-500">
-          Error fetching user data. Please try again later.
+          Error fetching user data. Please try again later!.
         </p>
       </main>
     );
