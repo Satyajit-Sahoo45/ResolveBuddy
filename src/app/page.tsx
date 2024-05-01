@@ -2,13 +2,13 @@ import { db } from "@/lib/db";
 
 export default async function Home() {
   try {
-    const items = await db.user.findMany();
+    const rooms = await db.room.findMany();
     return (
       <main className="flex min-h-screen flex-col items-center justify-between p-24">
-        {items.map((item, index) => {
+        {rooms.map((room, index) => {
           return (
-            <div key={item.id} className="text-white">
-              {item.name}
+            <div key={room.id} className="text-white">
+              {room.name}
             </div>
           );
         })}
