@@ -3,6 +3,7 @@
 import { getSession } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { Room } from "@prisma/client";
+import { revalidatePath } from "next/cache";
 
 export async function createRoomAction(roomData: Omit<Room, "userId" | "id">) {
   const session = await getSession();
@@ -12,4 +13,6 @@ export async function createRoomAction(roomData: Omit<Room, "userId" | "id">) {
     throw new Error("You must be logged in to create a room");
   }
   await db.room.create({ data: { ...roomData, userId: session?.user?.id } });
+
+  revalidatePath("/");
 }
