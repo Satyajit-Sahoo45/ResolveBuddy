@@ -106,7 +106,7 @@ export const CreateRoomForm = () => {
               </FormControl>
               <FormDescription>
                 List your programming languages, frameworks, libraries so people
-                can find you content
+                can find your content
               </FormDescription>
               <FormMessage />
             </FormItem>
