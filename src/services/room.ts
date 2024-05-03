@@ -1,9 +1,21 @@
 import { db } from "@/lib/db";
+import { Prisma } from "@prisma/client";
 import { unstable_noStore } from "next/cache";
 
-export async function getRooms() {
+export async function getRooms(search: string | undefined) {
   unstable_noStore();
-  const rooms = await db.room.findMany();
+
+  const where = search
+    ? {
+        tags: {
+          contains: search,
+        },
+      }
+    : undefined;
+
+  const rooms = await db.room.findMany({
+    where,
+  });
   return rooms;
 }
 

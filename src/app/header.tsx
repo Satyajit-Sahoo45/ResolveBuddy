@@ -16,6 +16,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import logo from "../../public/assets/logo.png";
 import Image from "next/image";
 import Link from "next/link";
+import { link } from "fs";
 
 function AccountDropdown() {
   const session = useSession();
@@ -34,7 +35,13 @@ function AccountDropdown() {
       <DropdownMenuContent>
         {isLoggedIn ? (
           <>
-            <DropdownMenuItem onClick={() => signOut()}>
+            <DropdownMenuItem
+              onClick={() =>
+                signOut({
+                  callbackUrl: "/",
+                })
+              }
+            >
               <LogOutIcon className="mr-2" /> Sign Out
             </DropdownMenuItem>
           </>
@@ -63,7 +70,12 @@ export function Header() {
           ResolveBuddy
         </Link>
         <div className="flex items-center gap-4">
-          <AccountDropdown />
+          {session.data && <AccountDropdown />}
+          {!session.data && (
+            <Button onClick={() => signIn()} variant="link">
+              <LogInIcon className="mr-w" /> Sign In
+            </Button>
+          )}
           <ModeToggle />
         </div>
       </div>

@@ -4,6 +4,7 @@ import "./globals.css";
 import { Providers } from "./provider";
 import { Header } from "./header";
 import NextTopLoader from "nextjs-toploader";
+import { Toaster } from "react-hot-toast";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -24,6 +25,7 @@ export default function RootLayout({
           <NextTopLoader />
           <Header />
           {children}
+          <Toaster position="top-center" reverseOrder={false} />
         </Providers>
       </body>
     </html>

@@ -1,7 +1,6 @@
 "use client";
 
 import "@stream-io/video-react-sdk/dist/css/styles.css";
-import { Room } from "@prisma/client";
 import {
   Call,
   CallControls,
@@ -13,30 +12,35 @@ import {
   StreamVideoClient,
 } from "@stream-io/video-react-sdk";
 import { useSession } from "next-auth/react";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { generateToken } from "./actions";
 import { useRouter } from "next/navigation";
+import { Room } from "@prisma/client";
+import toast from "react-hot-toast";
 
 const apiKey = process.env.NEXT_PUBLIC_GET_STREAM_API_KEY!;
 
-export const ResolveBuddyVideoPlayer = ({ room }: { room: Room }) => {
+export function ResolveBuddyVideoPlayer({ room }: { room: Room }) {
   const session = useSession();
+  console.log(session, "session: ");
   const [client, setClient] = useState<StreamVideoClient | null>(null);
   const [call, setCall] = useState<Call | null>(null);
   const router = useRouter();
 
   useEffect(() => {
     if (!room) return;
-
     if (!session.data) {
+      router.push("/");
+      toast.success("Login to access the room");
       return;
     }
-
     const userId = session.data.user.id;
     const client = new StreamVideoClient({
       apiKey,
       user: {
         id: userId,
+        name: session.data.user.name ?? undefined,
+        image: session.data.user.image ?? undefined,
       },
       tokenProvider: () => generateToken(),
     });
@@ -71,4 +75,4 @@ export const ResolveBuddyVideoPlayer = ({ room }: { room: Room }) => {
       </StreamVideo>
     )
   );
-};
+}

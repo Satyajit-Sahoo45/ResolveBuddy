@@ -4,10 +4,11 @@ import Link from "next/link";
 import React from "react";
 import { TagsList, splitTags } from "@/components/tags-list";
 import { ResolveBuddyVideoPlayer } from "./video";
+import { unstable_noStore } from "next/cache";
 
-type Props = {};
+export default async function page(props: { params: { roomId: string } }) {
+  unstable_noStore();
 
-export default async function page(props: any) {
   const roomId = props.params.roomId;
 
   const room = await getRoomData(roomId);
