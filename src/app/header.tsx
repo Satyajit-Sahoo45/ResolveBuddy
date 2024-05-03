@@ -71,9 +71,16 @@ export function Header() {
         </Link>
 
         <nav>
-          <Link href="/your-rooms" className="hover:text-gray-400">
-            Your Rooms
-          </Link>
+          {session.data && (
+            <div className="flex gap-4">
+              <Link href="/dashboard" className="hover:text-gray-400">
+                Dashboard
+              </Link>
+              <Link href="/your-rooms" className="hover:text-gray-400">
+                Your Rooms
+              </Link>
+            </div>
+          )}
         </nav>
 
         <div className="flex items-center gap-4">

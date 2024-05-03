@@ -8,10 +8,9 @@ import { unstable_noStore } from "next/cache";
 import { splitTags } from "@/lib/utils";
 
 export default async function page(props: { params: { roomId: string } }) {
-  unstable_noStore();
-
   const roomId = props.params.roomId;
 
+  unstable_noStore();
   const room = await getRoomData(roomId);
 
   if (!room) {

@@ -4,8 +4,6 @@ import { Prisma } from "@prisma/client";
 import { unstable_noStore } from "next/cache";
 
 export async function getRooms(search: string | undefined) {
-  unstable_noStore();
-
   const where = search
     ? {
         tags: {
@@ -21,8 +19,6 @@ export async function getRooms(search: string | undefined) {
 }
 
 export async function getUserRooms() {
-  unstable_noStore();
-
   const session = await getSession();
 
   if (!session) {
@@ -37,8 +33,6 @@ export async function getUserRooms() {
 }
 
 export async function getRoomData(roomId: string) {
-  unstable_noStore();
-
   const room = await db.room.findFirst({
     where: {
       id: roomId,
@@ -46,4 +40,12 @@ export async function getRoomData(roomId: string) {
   });
 
   return room;
+}
+
+export async function deleteRoom(roomId: string) {
+  await db.room.delete({
+    where: {
+      id: roomId,
+    },
+  });
 }
