@@ -69,6 +69,13 @@ export function Header() {
           <Image src={logo} alt="logo" width="50" height="50" />
           ResolveBuddy
         </Link>
+
+        <nav>
+          <Link href="/your-rooms" className="hover:text-gray-400">
+            Your Rooms
+          </Link>
+        </nav>
+
         <div className="flex items-center gap-4">
           {session.data && <AccountDropdown />}
           {!session.data && (

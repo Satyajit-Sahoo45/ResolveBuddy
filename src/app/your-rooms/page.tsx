@@ -1,17 +1,11 @@
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { getRooms } from "@/services/room";
-import { SearchBar } from "./SearchBar";
+import { getRooms, getUserRooms } from "@/services/room";
+import { SearchBar } from "../SearchBar";
 import { RoomCard } from "@/components/room-card";
 
-export default async function Home({
-  searchParams,
-}: {
-  searchParams: {
-    search: string;
-  };
-}) {
-  const rooms = await getRooms(searchParams.search);
+export default async function YourRooms() {
+  const rooms = await getUserRooms();
 
   return (
     <main className="min-h-screen p-16">
