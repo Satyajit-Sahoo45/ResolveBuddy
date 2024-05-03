@@ -12,8 +12,9 @@ import {
 import { Room } from "@prisma/client";
 import { Github } from "lucide-react";
 import { getRooms } from "@/services/room";
-import { TagsList, splitTags } from "@/components/tags-list";
+import { TagsList } from "@/components/tags-list";
 import { SearchBar } from "./SearchBar";
+import { splitTags } from "@/lib/utils";
 
 const RoomCard = ({ room }: { room: Room }) => {
   return (

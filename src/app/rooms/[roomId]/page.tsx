@@ -2,9 +2,10 @@ import { getRoomData } from "@/services/room";
 import { Github } from "lucide-react";
 import Link from "next/link";
 import React from "react";
-import { TagsList, splitTags } from "@/components/tags-list";
+import { TagsList } from "@/components/tags-list";
 import { ResolveBuddyVideoPlayer } from "./video";
 import { unstable_noStore } from "next/cache";
+import { splitTags } from "@/lib/utils";
 
 export default async function page(props: { params: { roomId: string } }) {
   unstable_noStore();

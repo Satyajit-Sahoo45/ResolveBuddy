@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -8,10 +8,8 @@ import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
-  FormLabel,
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
@@ -34,8 +32,13 @@ export function SearchBar() {
     },
   });
 
+  const search = query.get("search");
+
+  useEffect(() => {
+    form.setValue("search", search ?? "");
+  }, [search, form]);
+
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    // TODO: invoke a server action to store the data in our database
     if (values.search) {
       router.push(`/?search=${values.search}`);
     } else {
