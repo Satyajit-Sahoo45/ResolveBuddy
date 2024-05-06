@@ -22,7 +22,6 @@ const apiKey = process.env.NEXT_PUBLIC_GET_STREAM_API_KEY!;
 
 export function ResolveBuddyVideoPlayer({ room }: { room: Room }) {
   const session = useSession();
-  console.log(session, "session: ");
   const [client, setClient] = useState<StreamVideoClient | null>(null);
   const [call, setCall] = useState<Call | null>(null);
   const router = useRouter();
@@ -30,8 +29,6 @@ export function ResolveBuddyVideoPlayer({ room }: { room: Room }) {
   useEffect(() => {
     if (!room) return;
     if (!session.data) {
-      router.push("/");
-      toast.success("Login to access the room");
       return;
     }
     const userId = session.data.user.id;
