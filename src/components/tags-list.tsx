@@ -15,7 +15,7 @@ export function TagsList({ tags }: { tags: string[] }) {
             className={cn(badgeVariants())}
             key={index}
             onClick={() => {
-              router.push(`/?search=${tag}`);
+              router.push(`/dashboard?search=${tag}`);
             }}
           >
             {tag}
