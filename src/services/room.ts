@@ -1,6 +1,6 @@
 import { getSession } from "@/lib/auth";
 import { db } from "@/lib/db";
-import { Prisma } from "@prisma/client";
+import { Prisma, Room } from "@prisma/client";
 import { unstable_noStore } from "next/cache";
 
 export async function getRooms(search: string | undefined) {
@@ -48,4 +48,14 @@ export async function deleteRoom(roomId: string) {
       id: roomId,
     },
   });
+}
+
+export async function editRoom(roomData: Room) {
+  const updatedRoom = await db.room.update({
+    where: {
+      id: roomData.id,
+    },
+    data: roomData,
+  });
+  return updatedRoom;
 }
