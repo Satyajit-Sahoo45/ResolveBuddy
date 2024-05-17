@@ -1,7 +1,6 @@
 import { getSession } from "@/lib/auth";
 import { db } from "@/lib/db";
-import { Prisma, Room } from "@prisma/client";
-import { unstable_noStore } from "next/cache";
+import { Room } from "@prisma/client";
 
 export async function getRooms(search: string | undefined) {
   const where = search
